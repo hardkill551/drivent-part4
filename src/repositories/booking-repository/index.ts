@@ -20,9 +20,9 @@ async function getRoom(roomId:number) {
     return booking
 }
 async function getRoomCount(roomId:number) { 
-    const count = await prisma.booking.count({
+    const count = await prisma.booking.findMany({
         where:{
-            id:roomId
+            roomId
         }
     })
     return count
