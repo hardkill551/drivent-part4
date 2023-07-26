@@ -9,6 +9,6 @@ bookingRouter
     .all('/*', authenticateToken)
     .get('/', getBooking)
     .post('/', validateBody(bookingSchema), postBooking)
-    .put('/:bookingId', validateBody(bookingSchema),putBooking)
+    .put('/:bookingId', validateBody(bookingSchema), putBooking)
 
 export default bookingRouter

@@ -22,5 +22,5 @@ export async function putBooking(req:AuthenticatedRequest, res:Response) {
     const { userId } = req
     const { roomId } = req.body as RoomId
     const booking = bookingService.putBooking(roomId, userId, Number(bookingId))
-
+    res.send(booking)
 }
