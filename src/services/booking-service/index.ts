@@ -30,19 +30,22 @@ async function postBooking(roomId:number, userId:number) {
 }
 
 async function putBooking(roomId:number, userId:number, bookingId:number) {
-    bookingPutValidate(roomId, userId)
+    
+    await bookingPutValidate(roomId, userId, bookingId)
     const newbookingId = await bookingRepository.putBooking(roomId, userId, bookingId)
+    
     return { bookingId:newbookingId }
 }
 
-async function bookingPutValidate(roomId:number, userId:number,) {
+async function bookingPutValidate(roomId:number, userId:number, bookingId:number) {
     const room = await bookingRepository.getRoom(roomId)
     const roomCount = await bookingRepository.getRoomCount(roomId)
     const booking = await bookingRepository.getBooking(userId)
-    if(!room){
+    if(!room || !bookingId || !booking){
         throw notFoundError()
     }
-    if(room.capacity<=roomCount.length || !booking) throw Forbidden()
+    if(room.capacity<=roomCount.length || booking.id !== bookingId) throw Forbidden()
+    return
 }
 
 const bookingService = {
