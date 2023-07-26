@@ -17,6 +17,8 @@ export type ViaCEPAddressError = {
   error: boolean;
 };
 
+export type RoomId = { roomId: number}
+
 export type ViaCEPAddressResponse = {
   cep: string;
   logradouro: string;

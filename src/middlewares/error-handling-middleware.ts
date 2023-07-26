@@ -13,7 +13,11 @@ export function handleApplicationErrors(
       message: err.message,
     });
   }
-
+  if (err.name === 'Forbidden') {
+    return res.status(httpStatus.FORBIDDEN).send({
+      message: err.message,
+    });
+  }
   if (err.name === 'ConflictError' || err.name === 'DuplicatedEmailError') {
     return res.status(httpStatus.CONFLICT).send({
       message: err.message,
